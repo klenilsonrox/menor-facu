@@ -41,12 +41,20 @@ function showPage(id) {
 
 // MAPA (BOM JESUS DA LAPA)
 function initMap() {
-    const coords = [-13.2577, -43.4184];
+    const coords = [-23.2237, -45.9009];
+
     if (!mapObj) {
-        mapObj = L.map('map-bjl').setView(coords, 15);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapObj);
-        L.marker(coords).addTo(mapObj).bindPopup("<b>Coleta BJL</b>");
+        mapObj = L.map('map-bjl').setView(coords, 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapObj);
+
+        L.marker(coords)
+            .addTo(mapObj)
+            .bindPopup("<b>São José dos Campos</b>");
     }
+
     setTimeout(() => mapObj.invalidateSize(), 100);
 }
 
@@ -64,7 +72,7 @@ function postarForum() {
 function loadPosts() {
     const list = document.getElementById('posts-container');
     let posts = JSON.parse(localStorage.getItem('posts_db')) || [];
-    list.innerHTML = posts.map(p => <div class="post-item"><b>${p.u}:</b><p>${p.t}</p></div>).join('');
+    list.innerHTML = posts.map(p => `<div class="post-item"><b>${p.u}:</b><p>${p.t}</p></div>`).join('');
 }
 
 // QUIZ
@@ -114,6 +122,7 @@ function cadastrarVoluntario() {
 // AUTH
 function fazerLogin() {
     const u = document.getElementById('login-user').value;
+    alert("Login simulado para: " + u);
     if (u) { localStorage.setItem('user_ambient', u); location.reload(); }
 }
 function fazerCadastro() { alert("Cadastro simulado com sucesso!"); alternarAuth(); }
