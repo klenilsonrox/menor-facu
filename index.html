@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambiente São Jose</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- TELA DE LOGIN -->
+    <section id="auth-screen">
+        <div class="auth-container">
+            <h1 class="logo-font">Ambiente São Jose</h1>
+            <div id="login-form">
+                <h2>Login</h2>
+                <input type="text" id="login-user" placeholder="Usuário">
+                <input type="password" id="login-pass" placeholder="Senha">
+                <button onclick="fazerLogin()">Entrar</button>
+                <p>Novo aqui? <a href="javascript:void(0)" onclick="alternarAuth()">Cadastre-se</a></p>
+            </div>
+            <div id="register-form" style="display: none;">
+                <h2>Cadastro</h2>
+                <input type="text" id="reg-user" placeholder="Novo Usuário">
+                <input type="password" id="reg-pass" placeholder="Senha">
+                <button onclick="fazerCadastro()">Criar Conta</button>
+                <p><a href="javascript:void(0)" onclick="alternarAuth()">Voltar</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- APP PRINCIPAL -->
+    <main id="main-app" style="display: none;">
+        <header>
+            <span class="leaf">🌿</span>
+            <h1 class="logo-font" onclick="showPage('home')">Ambiente São Jose</h1>
+            <span class="leaf">🌿</span>
+            <button class="logout-btn" onclick="logout()">Sair</button>
+        </header>
+
+        <!-- HOME -->
+        <section id="home" class="page">
+            <div class="home-grid">
+                <div class="menu-item" onclick="showPage('noticias')"><h3>Noticias</h3><div class="img-box"><img src="https://cdn-icons-png.flaticon.com/512/2947/2947656.png"></div></div>
+                <div class="menu-item center-item" onclick="showPage('dicas')"><h3>Dicas e tutoriais</h3><div class="img-box large"><img src="https://cdn-icons-png.flaticon.com/512/3062/3062331.png"></div></div>
+                <div class="menu-item" onclick="showPage('forum')"><h3>Fórum</h3><div class="img-box"><img src="https://cdn-icons-png.flaticon.com/512/3126/3126462.png"></div></div>
+                <div class="menu-item" onclick="showPage('recursos')"><h3>Recursos</h3><div class="img-box"><img src="https://cdn-icons-png.flaticon.com/512/2913/2913520.png"></div></div>
+                <div class="menu-item" onclick="showPage('sobre')"><h3>Sobre</h3><div class="img-box"><img src="https://cdn-icons-png.flaticon.com/512/1256/1256650.png"></div></div>
+            </div>
+        </section>
+
+        <!-- RECURSOS (IMAGEM 3) -->
+        <section id="recursos" class="page">
+            <h2 class="title-font">Recursos</h2>
+            <div class="resources-top-row">
+                <div class="res-card" onclick="showPage('res-voluntario')"><h4>Área voluntário</h4><img src="https://cdn-icons-png.flaticon.com/512/3462/3462153.png"></div>
+                <div class="res-card" onclick="showPage('res-mapa')"><h4>Mapa de ponto de coleta</h4><img src="https://cdn-icons-png.flaticon.com/512/854/854878.png"></div>
+                <div class="res-card" onclick="showPage('res-quiz')"><h4>Quiz ecológico</h4><img src="https://cdn-icons-png.flaticon.com/512/5692/5692030.png"></div>
+            </div>
+            <div class="impact-full-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/2620/2620601.png">
+                <div class="report-content">
+                    <strong>Relatório de impacto</strong>
+                    <p>O projeto apresenta desafios ambientais significativos que devem ser abordados com responsabilidade e compromisso em Bom Jesus da Lapa.</p>
+                </div>
+            </div>
+            <button class="back-home-btn" onclick="showPage('home')">Voltar para Início</button>
+        </section>
+
+        <!-- DICAS (IMAGEM 4) -->
+        <section id="dicas" class="page">
+            <h2 class="title-font">Dicas e Tutoriais</h2>
+            <div class="content-card-main">
+                <h3 style="margin-bottom: 40px;">Como ajudar no meio ambiente</h3>
+                <div class="tips-row">
+                    <div class="tip-unit"><img src="https://cdn-icons-png.flaticon.com/512/1839/1839005.png"><p>Saber como o carbono prejudica o meio ambiente</p></div>
+                    <div class="tip-unit"><img src="https://cdn-icons-png.flaticon.com/512/3299/3299935.png"><p>Aprender sobre a reciclagem e não poluir</p></div>
+                    <div class="tip-unit"><img src="https://cdn-icons-png.flaticon.com/512/2822/2822369.png"><p>Aprender sobre o desmatamento e seus efeitos</p></div>
+                </div>
+            </div>
+            <button class="back-home-btn" onclick="showPage('home')">Voltar para Início</button>
+        </section>
+
+        <!-- SOBRE (IMAGEM 5) -->
+        <section id="sobre" class="page">
+            <h2 class="title-font">Sobre</h2>
+            <div class="content-card-main">
+                <p style="font-size: 1.1rem; line-height: 1.8;">Bem-vindo ao nosso site dedicado ao meio ambiente, onde promovemos a conscientização ecológica de maneira interativa e educativa. Oferecemos um quiz ecológico que testa e amplia o conhecimento dos nossos usuários sobre questões ambientais.</p>
+                <div class="social-icons">👤 ✉️ 🎧</div>
+            </div>
+            <button class="back-home-btn" onclick="showPage('home')">Voltar para Início</button>
+        </section>
+
+        <!-- FÓRUM (IMAGEM 2) -->
+        <section id="forum" class="page">
+            <h2 class="title-font">Fórum</h2>
+            <div class="forum-layout">
+                <div class="forum-sidebar">
+                    <textarea id="forum-text" placeholder="Digite aqui sua ideia..."></textarea>
+                    <button class="send-btn" onclick="postarForum()">➤</button>
+                </div>
+                <div id="posts-container" class="posts-list"></div>
+            </div>
+            <button class="back-home-btn" onclick="showPage('home')">Voltar</button>
+        </section>
+
+        <!-- MAPA -->
+        <section id="res-mapa" class="page">
+            <h2 class="title-font">Pontos de Coleta - BJL</h2>
+            <div id="map-bjl"></div>
+            <button class="back-home-btn" onclick="showPage('recursos')">Voltar</button>
+        </section>
+
+        <!-- VOLUNTÁRIOS -->
+        <section id="res-voluntario" class="page">
+            <h2 class="title-font">Seja um Voluntário</h2>
+            <div class="content-card-main">
+                <input type="text" id="vol-nome" placeholder="Seu nome" class="std-input">
+                <input type="text" id="vol-area" placeholder="Área de interesse" class="std-input">
+                <button class="back-home-btn" onclick="cadastrarVoluntario()">Enviar Cadastro</button>
+            </div>
+            <button class="back-home-btn" onclick="showPage('recursos')">Voltar</button>
+        </section>
+
+        <!-- QUIZ -->
+        <section id="res-quiz" class="page">
+            <h2 class="title-font">Quiz Ecológico</h2>
+            <div class="content-card-main">
+                <div id="quiz-item">...</div>
+                <div class="quiz-options">
+                    <button class="q-btn org" onclick="checkQuiz('organic')">Orgânico</button>
+                    <button class="q-btn pla" onclick="checkQuiz('plastic')">Plástico</button>
+                    <button class="q-btn pap" onclick="checkQuiz('paper')">Papel</button>
+                </div>
+                <p id="quiz-feedback"></p>
+            </div>
+            <button class="back-home-btn" onclick="showPage('recursos')">Voltar</button>
+        </section>
+
+        <!-- NOTICIAS -->
+        <section id="noticias" class="page">
+            <h2 class="title-font">Notícias</h2>
+            <div class="news-grid">
+                <div class="news-card"><h4>Queimadas</h4><p>As queimadas em nossa região atingem níveis críticos durante a estiagem, devastando o Cerrado e a Caatinga... </p><button onclick="lerMais('queimadas')">Ler mais...</button></div>
+                <div class="news-card"><h4>Desmatamento</h4><p>A retirada da vegetação nativa nas margens do Rio São Francisco acelera o assoreamento e reduz o volume das águas...</p><button onclick="lerMais('desmatamento')">Ler mais...</button></div>
+                <div class="news-card"><h4>Aquecimento</h4><p>O aumento das temperaturas globais reflete-se de forma severa no sertão baiano, prolongando os períodos de seca e dificultando a agricultura de subsistência...</p><button onclick="lerMais('aquecimento')">Ler mais...</button></div>
+                <div class="news-card"><h4>Poluição</h4><p>O descarte inadequado de plásticos e resíduos urbanos é uma ameaça constante à pureza das nossas águas...</p><button onclick="lerMais('poluicao')">Ler mais...</button></div>
+                
+            </div>
+            <button class="back-home-btn" onclick="showPage('home')">Voltar</button>
+        </section>
+
+<!-- PÁGINA DE DETALHE (AJUSTADA PARA MOSTRAR A IMAGEM TAMBÉM) -->
+<section id="detalhe-noticia" class="page">
+    <h2 id="titulo-detalhe" class="title-font"></h2>
+    <div class="content-card-main detail-article">
+        <img id="imagem-detalhe" src="" alt="Imagem da notícia" class="img-article-full">
+        <p id="texto-detalhe"></p>
+    </div>
+    <button class="back-home-btn" onclick="showPage('noticias')">Voltar para Notícias</button>
+</section>
+
+        <section id="detalhe-noticia" class="page">
+            <h2 id="titulo-detalhe" class="title-font"></h2>
+            <div class="content-card-main"><p id="texto-detalhe"></p></div>
+            <button class="back-home-btn" onclick="showPage('noticias')">Voltar</button>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
